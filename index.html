@@ -359,14 +359,34 @@
 <div class="footer">
     <p>Связь со мной: <a href="https://instagram.com/irina.faberlic.belarus" target="_blank">Instagram</a> | <a href="https://t.me/faberlic_irina_by" target="_blank">Telegram</a></p>
     <p>&copy; 2026. Продукция Faberlic. Сайт консультанта.</p>
+
 </div>
-<!-- ПРИВЕТСТВЕННЫЙ БАННЕР -->
-<div id="welcome-overlay">
-    <div class="welcome-card">
-        <img src="IMG_20260929_184250.jpg" alt="Ирина">
-        <h2>Добро пожаловать!</h2>
-        <p>Ваш консультант — <strong>Ирина</strong></p>
-        <div class="welcome-faberlic">Faberlic</div>
-    </div>
-</div>
-</html> 
+
+<!-- ================== СКРИПТЫ ================== -->
+<script>
+    // Приветственный баннер — показывается один раз за сессию
+    window.addEventListener('load', function() {
+        if (sessionStorage.getItem('welcomeShown')) return;
+        const overlay = document.getElementById('welcome-overlay');
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'auto';
+        sessionStorage.setItem('welcomeShown', 'true');
+        setTimeout(function() {
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+        }, 3000);
+    });
+
+    // Открытие и закрытие меню
+    function openMenu() {
+        document.getElementById('side-menu').classList.add('open');
+        document.getElementById('menu-overlay').classList.add('open');
+    }
+    function closeMenu() {
+        document.getElementById('side-menu').classList.remove('open');
+        document.getElementById('menu-overlay').classList.remove('open');
+    }
+</script>
+
+</body>
+</html>

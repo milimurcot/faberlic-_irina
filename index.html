@@ -360,21 +360,13 @@
     <p>Связь со мной: <a href="https://instagram.com/ВАШ_НИК" target="_blank">Instagram</a> | <a href="https://t.me/ВАШ_НИК" target="_blank">Telegram</a></p>
     <p>&copy; 2026. Продукция Faberlic. Сайт консультанта.</p>
 </div>
-
-<script>
-    // Приветственный баннер -- один раз за сессию
-    window.addEventListener('load', function() {
-        if (sessionStorage.getItem('welcomeShown')) return;
-        const overlay = document.getElementById('welcome-overlay');
-        overlay.style.opacity = '1';
-        overlay.style.pointerEvents = 'auto';
-        sessionStorage.setItem('welcomeShown', 'true');
-        setTimeout(function() {
-            overlay.style.opacity = '0';
-            overlay.style.pointerEvents = 'none';
-        }, 3000);
-    });
-
-    // Меню
-    function openMenu() {
-        document.getElementById('side-menu').c
+<!-- ПРИВЕТСТВЕННЫЙ БАННЕР -->
+<div id="welcome-overlay">
+    <div class="welcome-card">
+        <img src="IMG_20260929_184250.jpg" alt="Ирина">
+        <h2>Добро пожаловать!</h2>
+        <p>Ваш консультант — <strong>Ирина</strong></p>
+        <div class="welcome-faberlic">Faberlic</div>
+    </div>
+</div>
+</html> 

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помощь и вопросы | Ирина — консультант Faberlic</title>
+    <meta name="description" content="Ответы на частые вопросы о Faberlic: как зарегистрироваться, как заказать, доставка, оплата, возврат. Пошаговые инструкции и контакты консультанта Ирины.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Montserrat', sans-serif; background-color: #faf8f5; color: #1a1a1a; line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: #c5002b; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+        #menu-btn {
+            position: fixed; top: 15px; right: 15px; width: 52px; height: 52px;
+            background-color: #c5002b; color: #fff; border: none; border-radius: 50%;
+            font-size: 24px; cursor: pointer; z-index: 1000;
+            box-shadow: 0 4px 15px rgba(197, 0, 43, 0.4);
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        #menu-btn:hover { background-color: #a00022; transform: scale(1.05); }
+
+        #side-menu {
+            position: fixed; top: 0; right: -100%; width: 82%; max-width: 320px; height: 100%;
+            background: #fff; box-shadow: -5px 0 25px rgba(0,0,0,0.15); z-index: 1001;
+            transition: right 0.4s ease; padding: 60px 25px 25px; overflow-y: auto;
+        }
+        #side-menu.open { right: 0; }
+        #side-menu h3 { font-size: 1.3em; margin: 0 0 20px 0; text-align: center; border-bottom: 2px solid #fdf0f2; padding-bottom: 15px; }
+        #side-menu a {
+            display: block; padding: 14px 15px; margin-bottom: 8px; background: #fdf0f2;
+            color: #1a1a1a; text-decoration: none; border-radius: 10px; font-weight: 500;
+            transition: 0.2s; border-left: 4px solid #c5002b;
+        }
+        #side-menu a:hover { background: #c5002b; color: #fff; }
+        #side-menu .catalog-link {
+            background: linear-gradient(135deg, #c5002b 0%, #a00022 100%);
+            color: #fff; font-weight: 700; text-align: center;
+        }
+        #side-menu .catalog-link:hover { background: #8a001d; color: #fff; }
+        #menu-close { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 28px; color: #c5002b; cursor: pointer; }
+        #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; }
+        #menu-overlay.open { opacity: 1; pointer-events: auto; }
+
+        .page-hero {
+            background: linear-gradient(135deg, #fff 0%, #fdf0f2 100%);
+            padding: 70px 20px 40px; text-align: center;
+            border-bottom: 3px solid #c5002b;
+            position: relative; overflow: hidden;
+        }
+        .page-hero::before {
+            content: "❓";
+            position: absolute; font-size: 8em; opacity: 0.06;
+            top: 10px; right: -20px; transform: rotate(-15deg);
+        }
+        .page-hero h1 { font-size: 2em; margin: 0 0 10px 0; position: relative; }
+        .page-hero p { color: #555; margin: 0; font-size: 1em; position: relative; }
+
+        .intro-block {
+            background: #fff; padding: 25px 22px; border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+            border-left: 5px solid #c5002b;
+            margin: 25px 0; text-align: left;
+        }
+        .intro-block p { margin: 0 0 12px 0; font-size: 0.95em; color: #444; }
+        .intro-block p:last-child { margin-bottom: 0; }
+        .intro-block strong { color: #c5002b; }
+
+        .quick-nav {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0 30px 0;
+        }
+        .quick-nav a {
+            display: block;
+            background: #fff;
+            padding: 12px 10px;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 0.85em;
+            font-weight: 600;
+            border-left: 4px solid #c5002b;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .quick-nav a:hover { background: #c5002b; color: #fff; }
+        .quick-nav a span { display: block; font-size: 1.4em; margin-bottom: 3px; }
+
+        .subcategory {
+            text-align: center; font-size: 1.4em;
+            margin: 40px 0 20px 0; padding-bottom: 10px;
+            border-bottom: 2px solid #fdf0f2;
+            scroll-margin-top: 20px;
+        }
+        .subcategory:first-of-type { margin-top: 20px; }
+
+        /* Пошаговая инструкция */
+        .step-block {
+            background: #fff;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            margin-bottom: 18px;
+            border-left: 5px solid #c5002b;
+        }
+        .step {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+        .step:last-child { margin-bottom: 0; }
+        .step-num {
+            width: 34px; height: 34px;
+            background: linear-gradient(135deg, #c5002b 0%, #a00022 100%);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95em;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(197, 0, 43, 0.3);
+        }
+        .step-text { font-size: 0.92em; color: #333; }
+        .step-text strong { color: #c5002b; }
+
+        /* FAQ */
+        .faq-item {
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #c5002b;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .faq-item:hover { box-shadow: 0 6px 22px rgba(197, 0, 43, 0.12); }
+        .faq-question {
+            padding: 18px 20px;
+            font-weight: 600;
+            font-size: 0.95em;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            user-select: none;
+        }
+        .faq-question .icon {
+            color: #c5002b;
+            font-size: 1.3em;
+            font-weight: 700;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+        .faq-item.open .faq-question .icon { transform: rotate(45deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            padding: 0 20px;
+            font-size: 0.9em;
+            color: #444;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px;
+            padding: 0 20px 18px 20px;
+        }
+        .faq-answer a { color: #c5002b; font-weight: 600; }
+
+        /* Преимущества */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .benefit-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 18px 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-bottom: 3px solid #c5002b;
+            text-align: center;
+        }
+        .benefit-card .icon { font-size: 1.8em; display: block; margin-bottom: 6px; }
+        .benefit-card .title { font-weight: 600; font-size: 0.9em; color: #1a1a1a; }
+        .benefit-card .text { font-size: 0.78em; color: #666; margin-top: 4px; }
+
+        /* Контакты */
+        .contact-block {
+            background: #fff;
+            padding: 28px 22px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            text-align: center;
+            border-left: 5px solid #c5002b;
+            margin-bottom: 20px;
+        }
+        .contact-block h3 { margin-top: 0; }
+        .contact-block p { color: #555; font-size: 0.95em; }
+        .contact-btn {
+            display: inline-block;
+            padding: 14px 26px;
+            margin: 6px 4px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95em;
+            color: #fff;
+            transition: 0.3s;
+        }
+        .contact-btn.insta {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        .contact-btn.tg { background: #0088cc; }
+        .contact-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+        /* Блоки советов */
+        .tip-list {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #c5002b;
+            margin-bottom: 16px;
+        }
+        .tip-list h3 { margin: 0 0 12px 0; font-size: 1.05em; }
+        .tip-list ul { margin: 0; padding-left: 20px; }
+        .tip-list li { font-size: 0.92em; color: #444; margin-bottom: 8px; }
+        .tip-list li:last-child { margin-bottom: 0; }
+
+        .subscribe-block {
+            background: linear-gradient(135deg, #c5002b 0%, #a00022 100%);
+            color: #fff; padding: 35px 20px; border-radius: 20px;
+            text-align: center; margin: 30px 20px;
+        }
+        .subscribe-block h2 { color: #fff; margin-top: 0; }
+        .subscribe-block p { color: #fce4e7; margin-bottom: 20px; }
+        .subscribe-block .btn {
+            display: inline-block; background: #fff; color: #c5002b;
+            padding: 15px 30px; font-size: 1em; font-weight: 700;
+            text-decoration: none; border-radius: 30px; transition: 0.3s;
+        }
+        .subscribe-block .btn:hover { background: #fdf0f2; }
+
+        #social-float {
+            position: fixed; bottom: 20px; right: 20px;
+            display: flex; flex-direction: column; gap: 12px; z-index: 999;
+        }
+        .social-btn {
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        }
+        .social-btn:hover { transform: scale(1.1); }
+        .social-btn svg { width: 30px; height: 30px; fill: #fff; }
+        #instagram-float { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        #telegram-float { background-color: #0088cc; }
+
+        .footer { background-color: #1a1a1a; color: #fff; padding: 30px 20px; font-size: 0.85em; text-align: center; margin-top: 20px; }
+        .footer a { color: #f5c2c7; text-decoration: none; margin: 0 5px; }
+    </style>
+</head>
+<body>
+
+<button id="menu-btn" onclick="openMenu()">☰</button>
+<div id="menu-overlay" onclick="closeMenu()"></div>
+
+<nav id="side-menu">
+    <button id="menu-close" onclick="closeMenu()">×</button>
+    <h3>Разделы сайта</h3>
+    <a href="https://faberlic.com/by/ru/catalogs/1284?sponsornumber=744653782" target="_blank" class="catalog-link">📖 Актуальный каталог</a>
+    <a href="index.html">🏠 Главная</a>
+    <a href="face.html">💆‍♀️ Уход за лицом</a>
+    <a href="makeup.html">💄 Косметика</a>
+    <a href="men.html">🧔 Мужская линия</a>
+    <a href="parfum.html">🌸 Парфюмерия</a>
+    <a href="bads.html">💊 БАДы и здоровье</a>
+    <a href="home.html">🏠 Товары для дома</a>
+    <a href="help.html">❓ Помощь и вопросы</a>
+</nav>
+
+<div class="page-hero">
+    <h1>Помощь и вопросы</h1>
+    <p>Ответы на всё, что важно знать о Faberlic</p>
+</div>
+
+<div class="container">
+
+    <div class="intro-block">
+        <p>Здесь я собрала самые популярные вопросы, которые задают мне клиенты. Если не найдёте ответ — <strong>напишите мне в Instagram или Telegram</strong>, я всегда на связи и помогу разобраться.</p>
+    </div>
+
+    <!-- БЫСТРАЯ НАВИГАЦИЯ -->
+    <div class="quick-nav">
+        <a href="#reg"><span>📝</span>Регистрация</a>
+        <a href="#order"><span>🛒</span>Заказ</a>
+        <a href="#delivery"><span>🚚</span>Доставка</a>
+        <a href="#payment"><span>💳</span>Оплата</a>
+        <a href="#discount"><span>🎁</span>Скидка 20%</a>
+        <a href="#faq"><span>❓</span>Частые вопросы</a>
+    </div>
+
+    <!-- РЕГИСТРАЦИЯ -->
+    <h2 class="subcategory" id="reg">Как зарегистрироваться</h2>
+
+    <div class="step-block">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">Нажмите на <strong>ссылку регистрации</strong> (она есть в меню сайта — «Актуальный каталог» или на главной странице).</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">Заполните короткую форму: <strong>имя, фамилия, телефон, email</strong>.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">Выберите <strong>страну и город</strong> — от этого зависит доставка.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">Придумайте <strong>пароль</strong> и подтвердите регистрацию.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-text">Готово! Теперь вы — <strong>клиент Faberlic со скидкой 20%</strong>. Вам на почту придёт подтверждение.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-text">Напишите мне, чтобы я помогла с первым заказом и подобрала уход.</div>
+        </div>
+    </div>
+
+    <div class="tip-list">
+        <h3>💡 Полезно знать</h3>
+        <ul>
+            <li>Регистрация <strong>бесплатная</strong> и ни к чему не обязывает.</li>
+            <li>Скидка 20% действует сразу после регистрации.</li>
+            <li>Вы можете заказывать как через меня, так и самостоятельно на сайте Faberlic.</li>
+            <li>Ваш персональный номер клиента сохранится навсегда.</li>
+        </ul>
+    </div>
+
+    <!-- ЗАКАЗ -->
+    <h2 class="subcategory" id="order">Как сделать заказ</h2>
+
+    <div class="step-block">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">Откройте <strong>актуальный каталог</strong> (ссылка в меню сайта).</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">Выберите понравившиеся товары и добавьте их в <strong>корзину</strong>.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">Перейдите в корзину и нажмите <strong>«Оформить заказ»</strong>.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">Укажите <strong>адрес доставки</strong> и выберите удобный пункт выдачи или курьера.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-text">Подтвердите заказ — деньги <strong>спишутся только после сборки</strong>.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-text">Следите за статусом заказа в личном кабинете.</div>
+        </div>
+    </div>
+
+    <div class="tip-list">
+        <h3>💡 Полезно знать</h3>
+        <ul>
+            <li>Заказы формируются по каталогам — обычно раз в 3–4 недели.</li>
+            <li>Если товара нет в наличии, его можно заказать в следующем каталоге.</li>
+            <li>Перед заказом советую уточнить у меня наличие и акции — я подскажу выгодные предложения.</li>
+        </ul>
+    </div>
+
+    <!-- ДОСТАВКА -->
+    <h2 class="subcategory" id="delivery">Доставка</h2>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Сколько стоит доставка?</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Стоимость зависит от региона и способа доставки. Обычно это <strong>от 3 до 7 рублей</strong> при доставке в пункт выдачи. Курьерская доставка — дороже. Точную стоимость вы увидите при оформлении заказа.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Сколько идёт заказ?</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Заказ формируется по каталогам — обычно <strong>2–3 недели</strong> с момента закрытия каталога. Точные сроки зависят от региона.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Где можно получить заказ?</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Удобным для вас способом: <strong>в пункте выдачи</strong> (самый популярный вариант), <strong>курьером</strong> до двери или <strong>через меня</strong>, если я получаю заказ сама и передаю вам лично.
+        </div>
+    </div>
+
+    <!-- ОПЛАТА -->
+    <h2 class="subcategory" id="payment">Оплата</h2>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Когда нужно платить?</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Деньги списываются <strong>только после того, как заказ собран и отправлен</strong>. Если товара не оказалось в наличии — оплата не производится.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Какие способы оплаты?</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Оплата картой онлайн (Visa, MasterCard, БЕЛКАРТ), через <strong>ЕРИП</strong>, наличными при получении в пункте выдачи или курьеру.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Можно ли вернуть товар?</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Да, в течение <strong>14 дней</strong> с момента получения, если товар не был в использовании и сохранена упаковка. Свяжитесь со мной или напишите в поддержку Faberlic.
+        </div>
+    </div>
+
+    <!-- СКИДКА 20% -->
+    <h2 class="subcategory" id="discount">Скидка 20%</h2>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Как получить скидку 20%?</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="faq-answer">
+            Скидка 20% даётся <strong>автоматически после регистрации</strong> по моей ссылке. Вы регистрируетесь как клиент Faberlic, и сразу получаете доступ к каталогу по ценам со скидкой.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Нужно ли что-то покупать для регистрации?</span>
+            <span class="icon">+</span>
+        </div>
+        <div class="faq-answer">
+            <strong>Нет.</strong> Регистрация полностью бесплатная и ни к чему не обязывает. Вы ничего не должны покупать и не платите никаких взносов.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+  

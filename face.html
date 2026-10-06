@@ -17,7 +17,6 @@
     border-radius: 14px;
     cursor: pointer;
     transition: 0.3s;
-    white-space: nowrap;
     display: inline-block;
 }
 .shade:hover {
@@ -156,34 +155,51 @@
         }
         .subcategory:first-of-type { margin-top: 20px; }
 
-        /* Карточка товара */
         .product-card {
-            background: #fff; padding: 20px; border-radius: 18px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06); margin-bottom: 18px;
-            border-left: 5px solid #c5002b;
-        }
-        .product-top {
-    display: block;
+    background: #fff;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    margin-bottom: 18px;
+    border-left: 5px solid #c5002b;
+}
+
+.product-top {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
     margin-bottom: 12px;
 }
-        .product-img {
-    width: 100%;
-    height: 220px;
-    border-radius: 16px;
+
+.product-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 14px;
     object-fit: cover;
+    flex-shrink: 0;
     border: 2px solid #fdf0f2;
     background-color: #fdf0f2;
-    display: block;
-    margin-bottom: 15px;
 }
-        .product-info h3 { margin: 0 0 6px 0; font-size: 1.1em; }
+        .product-info h3 {
+    margin: 0 0 6px 0;
+    font-size: 1.1em;
+        }
         .product-tag {
             display: inline-block; background: #fdf0f2; color: #c5002b;
             font-size: 0.75em; font-weight: 600; padding: 3px 10px;
             border-radius: 10px; margin-bottom: 6px;
         }
-        .product-info .short { font-size: 0.9em; color: #555; margin: 0; }
-        .product-desc { font-size: 0.92em; color: #444; margin: 0 0 15px 0; }
+        
+.product-info .short {
+    font-size: 0.9em;
+    color: #555;
+    margin: 0;
+}
+        .product-desc {
+    font-size: 0.92em;
+    color: #444;
+    margin: 0 0 15px 0;
+        }
         .btn-order {
             display: inline-block; background: #c5002b; color: #fff;
             padding: 12px 28px; font-size: 0.95em; font-weight: 600;
